@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CrushComponent } from './crush/crush.component';
+import { ShareModule } from '../../share.module';
 
 @NgModule({
   declarations: [
     CrushComponent
   ],
   imports: [
-    CommonModule
+    ShareModule
   ]
 })
 export class InfoModule { }
