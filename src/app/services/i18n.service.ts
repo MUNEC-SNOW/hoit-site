@@ -12,10 +12,14 @@ import {
 })
 export class I18nService {
     lang = new BehaviorSubject<TRANSLATION_LANG_KEY>('en-US')
-
+    private currentLang: TRANSLATION_LANG_KEY = 'en-US'
     constructor() { }
 
     setLang(lang: TRANSLATION_LANG_KEY): void {
+        if(this.currentLang === lang) {
+            return
+        }
+        this.currentLang = lang
         this.lang.next(lang)
     }
 

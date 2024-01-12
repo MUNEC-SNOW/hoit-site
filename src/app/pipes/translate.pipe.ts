@@ -16,7 +16,7 @@ export class TranslatePipe implements PipeTransform, OnDestroy {
         if (!this.onLangChange) {
             this.onLangChange = this.translate.getLang().subscribe(lang_key => {
                 this.value = this.translate.getTranslate(lang_key, value)
-                this._ref.markForCheck()
+                // this._ref.
             });
         }
         console.log(this.value);
@@ -26,5 +26,4 @@ export class TranslatePipe implements PipeTransform, OnDestroy {
     ngOnDestroy(): void {
         this.onLangChange = undefined
     }
-
 }
