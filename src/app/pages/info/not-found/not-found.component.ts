@@ -32,6 +32,6 @@ export class NotFoundComponent implements AfterViewInit, OnDestroy {
     ngOnDestroy(): void {
         document.title = 'hoit-site'
         this.hoverEvent?.unsubscribe()
-        this.parallaxInstance = undefined
+        this.parallaxInstance?.destroy()
     }
 }
