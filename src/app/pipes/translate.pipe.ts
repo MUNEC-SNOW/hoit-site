@@ -1,9 +1,11 @@
-import { ChangeDetectorRef, OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { I18nService } from '@/services';
+import { ChangeDetectorRef, OnDestroy, Pipe, PipeTransform } from '@angular/core'
+import { Subscription } from 'rxjs'
+import { I18nService } from '@/services'
+import { TRANSLATION_TEXT_KEY } from '@/types'
 
 @Pipe({
     name: 'translate',
+    pure: false,
     standalone: true
 })
 export class TranslatePipe implements PipeTransform, OnDestroy {
@@ -11,19 +13,17 @@ export class TranslatePipe implements PipeTransform, OnDestroy {
     onLangChange: Subscription | undefined
     constructor(private translate: I18nService, private _ref: ChangeDetectorRef) {}
 
-    transform(value: any): string {
-        console.log(value);
+    transform(value: TRANSLATION_TEXT_KEY): string {
         if (!this.onLangChange) {
             this.onLangChange = this.translate.getLang().subscribe(lang_key => {
                 this.value = this.translate.getTranslate(lang_key, value)
-                // this._ref.
-            });
+                this._ref.markForCheck()
+            })
         }
-        console.log(this.value);
-        return this.value;
+        return this.value
     }
 
     ngOnDestroy(): void {
-        this.onLangChange = undefined
+        this.onLangChange?.unsubscribe()
     }
 }

@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable } from 'rxjs'
 import {
     TRANSLATION_LANG_KEY,
     TRANSLATION_TEXT_KEY,
     translation
-} from '@/types';
-
+} from '@/types'
 
 @Injectable({
     providedIn: 'root'
