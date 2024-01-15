@@ -1,70 +1,39 @@
-$spacer: 3px;
-$sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+$spacer: 6px;
 
-@each $size in $sizes {
-    .ma-#{$size} {
-        margin: $spacer * $size !important;
-    }
+.pa-0 {
+    padding: $spacer * 0 !important;
+}
 
-    .mx-#{$size} {
-        margin-left: $spacer * $size !important;
-        margin-right: $spacer * $size !important;
-    }
+.pa-1 {
+    padding: $spacer * 1 !important;
+}
 
-    .my-#{$size} {
-        margin-top: $spacer * $size !important;
-        margin-bottom: $spacer * $size !important;
-    }
+.pa-2 {
+    padding: $spacer * 2 !important;
+}
+.pa-3 {
+    margin: $spacer * 3 !important;
+}
+.pa-4 {
+    padding: $spacer * 4 !important;
+}
 
-    .mt-#{$size} {
-        margin-top: $spacer * $size !important;
-    }
+.mt-0 {
+    margin-top: $spacer * 0 !important;
+}
 
-	.mr-#{$size} {
-        margin-right: $spacer * $size !important;
-    }
+.mt-1 {
+    margin-top: $spacer * 1 !important;
+}
 
-    .mb-#{$size} {
-        margin-bottom: $spacer * $size !important;
-    }
-
-    .ml-#{$size} {
-        margin-left: $spacer * $size !important;
-    }
-
-    .pr-#{$size} {
-        padding-right: $spacer * $size !important;
-    }
-
-	.pa-#{$size} {
-        padding: $spacer * $size !important;
-    }
-
-    .px-#{$size} {
-        padding-left: $spacer * $size !important;
-        padding-right: $spacer * $size !important;
-    }
-
-    .py-#{$size} {
-        padding-top: $spacer * $size !important;
-        padding-bottom: $spacer * $size !important;
-    }
-
-    .pt-#{$size} {
-        padding-top: $spacer * $size !important;
-    }
-
-    .pb-#{$size} {
-        padding-bottom: $spacer * $size !important;
-    }
-
-    .pl-#{$size} {
-        padding-left: $spacer * $size !important;
-    }
-
-    .pr-#{$size} {
-        padding-right: $spacer * $size !important;
-    }
+.mt-2 {
+    margin-top: $spacer * 2 !important;
+}
+.mt-3 {
+    margin-top: $spacer * 3 !important;
+}
+.mt-4 {
+    margin-top: $spacer * 4 !important;
 }
 
 .w-full {

@@ -1,116 +1,131 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "hoit-site": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "outputPath": "dist/hoit-site",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "hoit-site": {
+        "projectType": "application",
+        "schematics": {
+            "@schematics/angular:component": {
+                "style": "scss"
+            }
+        },
+        "root": "",
+        "sourceRoot": "src",
+        "prefix": "app",
+        "architect": {
+            "build": {
+                "builder": "@angular-devkit/build-angular:application",
+                "options": {
+                    "stylePreprocessorOptions": {
+                        "includePaths": [
+                            "src/assets/styles",
+                            "src/styles.scss"
+                        ]
+                    },
+                    "outputPath": "dist/hoit-site",
+                    "index": "src/index.html",
+                    "browser": "src/main.ts",
+                    "polyfills": [
+                        "zone.js"
+                    ],
+                    "tsConfig": "tsconfig.app.json",
+                    "inlineStyleLanguage": "scss",
+                    "assets": [
+                        "src/favicon.ico",
+                        "src/assets"
+                    ],
+                    "styles": [
+                        "src/styles.scss"
+                    ],
+                    "scripts": []
                 },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                "configurations": {
+                    "production": {
+                        "budgets": [
+                            {
+                                "type": "initial",
+                                "maximumWarning": "500kb",
+                                "maximumError": "1mb"
+                            },
+                            {
+                                "type": "anyComponentStyle",
+                                "maximumWarning": "2kb",
+                                "maximumError": "4kb"
+                            }
+                        ],
+                        "outputHashing": "all"
+                    },
+                    "development": {
+                        "optimization": false,
+                        "extractLicenses": false,
+                        "sourceMap": true
+                    }
+                },
+                "defaultConfiguration": "production"
+            },
+            "serve": {
+            "builder": "@angular-devkit/build-angular:dev-server",
+            "configurations": {
+                "production": {
+                    "buildTarget": "hoit-site:build:production"
+                },
+                "development": {
+                    "buildTarget": "hoit-site:build:development"
                 }
-              ],
-              "outputHashing": "all"
             },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "hoit-site:build:production"
+            "defaultConfiguration": "development"
             },
-            "development": {
-              "buildTarget": "hoit-site:build:development"
+            "extract-i18n": {
+                "builder": "@angular-devkit/build-angular:extract-i18n",
+                "options": {
+                    "buildTarget": "hoit-site:build"
+                }
+            },
+            "test": {
+                "builder": "@angular-devkit/build-angular:karma",
+                "options": {
+                    "stylePreprocessorOptions": {
+                        "includePaths": [
+                            "src/assets/styles",
+                            "src/styles.scss"
+                        ]
+                    },
+                    "polyfills": [
+                        "zone.js",
+                        "zone.js/testing"
+                    ],
+                    "tsConfig": "tsconfig.spec.json",
+                    "inlineStyleLanguage": "scss",
+                    "assets": [
+                        "src/favicon.ico",
+                        "src/assets"
+                    ],
+                    "styles": [
+                        "src/assets/styles/index.scss",
+                        "src/assets/styles/layout.scss",
+                        "src/assets/styles/basic.scss",
+                        "src/styles.scss"
+                    ],
+                    "scripts": []
+                }
+            },
+            "lint": {
+                "builder": "@angular-eslint/builder:lint",
+                "options": {
+                    "lintFilePatterns": [
+                        "src/**/*.ts",
+                        "src/**/*.html"
+                    ]
+                }
             }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "hoit-site:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
-          }
         }
-      }
+        }
+    },
+    "cli": {
+        "analytics": "f692c3d9-ce02-4c90-99af-b7618a7a8199",
+        "schematicCollections": [
+            "@angular-eslint/schematics"
+        ]
     }
-  },
-  "cli": {
-    "analytics": "f692c3d9-ce02-4c90-99af-b7618a7a8199",
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
-  }
 }
