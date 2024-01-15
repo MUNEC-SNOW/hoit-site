@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ShareModule } from './share.module';
-import { I18nService } from '@/services';
-import { TRANSLATION_LANG_KEY } from '@/types';
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { ShareModule } from './share.module'
+import { I18nService } from '@/services'
+import { TRANSLATION_LANG_KEY } from '@/types'
 
 @Component({
     selector: 'app-root',
@@ -16,7 +16,7 @@ import { TRANSLATION_LANG_KEY } from '@/types';
     styleUrl: './app.component.scss'
 })
 export class AppComponent {
-    title = 'hoit-site';
+    title = 'hoit-site'
     constructor(private i18n: I18nService) {}
 
     changeLang(lang: TRANSLATION_LANG_KEY) {

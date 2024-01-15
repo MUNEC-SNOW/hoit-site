@@ -1,0 +1,125 @@
+$spacer: 3px;
+$sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+
+@each $size in $sizes {
+    .ma-#{$size} {
+        margin: $spacer * $size !important;
+    }
+
+    .mx-#{$size} {
+        margin-left: $spacer * $size !important;
+        margin-right: $spacer * $size !important;
+    }
+
+    .my-#{$size} {
+        margin-top: $spacer * $size !important;
+        margin-bottom: $spacer * $size !important;
+    }
+
+    .mt-#{$size} {
+        margin-top: $spacer * $size !important;
+    }
+
+	.mr-#{$size} {
+        margin-right: $spacer * $size !important;
+    }
+
+    .mb-#{$size} {
+        margin-bottom: $spacer * $size !important;
+    }
+
+    .ml-#{$size} {
+        margin-left: $spacer * $size !important;
+    }
+
+    .pr-#{$size} {
+        padding-right: $spacer * $size !important;
+    }
+
+	.pa-#{$size} {
+        padding: $spacer * $size !important;
+    }
+
+    .px-#{$size} {
+        padding-left: $spacer * $size !important;
+        padding-right: $spacer * $size !important;
+    }
+
+    .py-#{$size} {
+        padding-top: $spacer * $size !important;
+        padding-bottom: $spacer * $size !important;
+    }
+
+    .pt-#{$size} {
+        padding-top: $spacer * $size !important;
+    }
+
+    .pb-#{$size} {
+        padding-bottom: $spacer * $size !important;
+    }
+
+    .pl-#{$size} {
+        padding-left: $spacer * $size !important;
+    }
+
+    .pr-#{$size} {
+        padding-right: $spacer * $size !important;
+    }
+}
+
+.w-full {
+	width: 100%;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.justify-start {
+	justify-content: flex-start;
+}
+
+.justify-end {
+	justify-content: flex-end;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-around {
+	justify-content: space-around;
+}
+
+.justify-evenly {
+	justify-content: space-evenly;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.align-start {
+	align-items: flex-start;
+}
+.align-end {
+	align-items: flex-end;
+}
+
+.cursor-pointer {
+	cursor: pointer !important;
+}
+
+.cursor-not-allowed {
+	cursor: not-allowed !important;
+}

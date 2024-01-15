@@ -1,0 +1,70 @@
+html, #hoit-site-app {
+    display: block;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100%;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	margin: 0;
+	padding: 0;
+    line-height: 1;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 16px;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+	box-shadow: 0 0 0 30px white inset !important;
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+	-o-appearance: none !important;
+	-ms-appearance: none !important;
+	appearance: none !important;
+	margin: 0;
+}
+input[type="number"]{
+	-webkit-appearance:textfield;
+	-moz-appearance:textfield;
+	-o-appearance:textfield;
+	-ms-appearance:textfield;
+	appearance:textfield;
+}
+.whitespace-nowrap {
+	white-space: nowrap;
+}
