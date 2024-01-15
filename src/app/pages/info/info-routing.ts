@@ -1,5 +1,5 @@
-import { Route } from '@angular/router';
-import { CrushComponent } from './crush/crush.component';
+import { Route } from '@angular/router'
+import { CrushComponent } from './crush/crush.component'
 
 export default [
     {
@@ -13,4 +13,4 @@ export default [
             },
         ]
     }
-] as Route[];
+] as Route[]
