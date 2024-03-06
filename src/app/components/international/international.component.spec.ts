@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { CrushComponent } from './crush.component'
+import { InternationalComponent } from './international.component'
 
-describe('CrushComponent', () => {
-    let component: CrushComponent
-    let fixture: ComponentFixture<CrushComponent>
+describe('InternationalComponent', () => {
+    let component: InternationalComponent
+    let fixture: ComponentFixture<InternationalComponent>
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [CrushComponent]
+            imports: [InternationalComponent]
         })
             .compileComponents()
 
-        fixture = TestBed.createComponent(CrushComponent)
+        fixture = TestBed.createComponent(InternationalComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
     })
