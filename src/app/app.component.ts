@@ -1,17 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { ShareModule } from './share.module'
+import { InternationalComponent } from './components/international/international.component'
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [
-        ShareModule,
-        RouterOutlet
-    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+    styleUrl: './app.component.scss',
+    imports: [
+        ShareModule,
+        RouterOutlet,
+        InternationalComponent
+    ]
 })
 export class AppComponent {
     title = 'hoit-site'

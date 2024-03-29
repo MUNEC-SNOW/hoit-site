@@ -1,1 +1,10 @@
-<p>international works!</p>
+<div class="change-lang-wrapper">
+    <button (click)="changeShowLangList()">international works!</button>
+    @if (showLangList) {
+        <div class="lang-list-wrapper">
+            @for (lang of langList; track lang.code; let index = $index) {
+                <button class="change-lang-btn" (click)="changeLang(lang.code)" (tabindex)="index">{{ lang.name }}</button>
+            }
+        </div>
+    }
+</div>
