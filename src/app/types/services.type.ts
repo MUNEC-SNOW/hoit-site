@@ -12,15 +12,15 @@ export const translation = {
 
 export const translationLangList = [{
     code: 'en-US',
-    name: 'English'
+    name: 'EN'
 },
 {
     code: 'zh-CN',
-    name: '中文',
+    name: '简',
 },
 {
     code: 'zh-HK',
-    name: '中文(繁体)'
+    name: '繁'
 }] as const
 
 export const translation_lang_key = Object.keys(translation) as Array<TRANSLATION_LANG_KEY>
