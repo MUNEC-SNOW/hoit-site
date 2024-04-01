@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { ClickStopPropagationDirective } from './click-stop-propagation.directive'
+import { ClickStopPropagationDirective } from '.'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 @Component({

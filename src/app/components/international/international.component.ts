@@ -1,6 +1,7 @@
-import { ClickStopPropagationDirective } from '@/directives/click-stop-propagation.directive'
-import { I18nService, LANG_OPTIONS, langList } from '@/services'
 import { Component } from '@angular/core'
+import { ClickStopPropagationDirective } from '@/directives'
+import { I18nService } from '@/services'
+import { LANG_OPTIONS, langList } from '@/types'
 
 @Component({
     selector: 'app-international',

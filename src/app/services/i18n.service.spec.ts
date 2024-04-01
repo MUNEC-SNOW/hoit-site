@@ -3,8 +3,8 @@ import {
     HttpTestingController,
 } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
-
-import { I18nService, Translations } from './i18n.service'
+import { I18nService } from '@/services'
+import { Translations } from '@/types'
 
 const englishTranslations = { hello: 'hello' }
 const chineseTranslations = { hello: '你好' }

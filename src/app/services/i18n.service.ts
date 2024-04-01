@@ -1,27 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core'
-import { Observable, map, of, take } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
-
-export const langList = [
-    {
-        name: '简',
-        code: 'cn'
-    },
-    {
-        name: '繁',
-        code: 'hk'
-    },
-    {
-        name: 'EN',
-        code: 'en'
-    }
-] as const
-
-export declare type LANG_OPTIONS = typeof langList[number]['code']
-
-export interface Translations {
-    [key: string]: string;
-}
+import { Observable, map, of, take } from 'rxjs'
+import { LANG_OPTIONS, Translations } from '@/types'
 
 @Injectable({
     providedIn: 'root'

@@ -2,10 +2,10 @@ import { ChangeDetectorRef, Component, EventEmitter } from '@angular/core'
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { Observable, of } from 'rxjs'
 import { delay } from 'rxjs/operators'
-
 import { expectContent } from '@/tests/element.spec-helper'
 import { TranslatePipe } from './translate.pipe'
-import { I18nService, Translations } from '@/services'
+import { I18nService } from '@/services'
+import { Translations } from '@/types'
 
 const key1 = 'key1'
 const key2 = 'key2'
