@@ -16,14 +16,49 @@
             background-color: transparent;
             color: #C822FF;
             text-align: center;
-            $positions: 1, 2, 3;
-            @each $position in $positions {
-                &:nth-of-type(#{$position}) {
-                    transform: rotate(#{($position - 1) * 45}deg);
-                    transform-origin: 0.3rem 4.4em;
-                    animation: rotateAnimation#{($position - 1) * 45} 0.5s linear forwards;
-                }
+
+            // $positions: 1, 2, 3;
+            // @each $position in $positions {
+            //     &:nth-of-type(#{$position}) {
+            //         transform: rotate(#{($position - 1) * 45}deg);
+            //         transform-origin: 0.3rem 4.4em;
+            //         animation: rotateAnimation#{($position - 1) * 45} 0.5s linear forwards;
+            //     }
+            // }
+
+            &:nth-of-type(1) {
+                transform: rotate(0);
+                transform-origin: 0.3rem 4.4em;
+            }
+            &:nth-of-type(2) {
+                transform: rotate(45deg);
+                transform-origin: 0.3rem 4.4em;
+                animation: rotateAnimation45 0.5s linear forwards;
+            }
+            &:nth-of-type(3) {
+                transform: rotate(90deg);
+                transform-origin: 0.3rem 4.4em;
+                animation: rotateAnimation90 0.5s linear forwards;
             }
         }
     }
 }
+
+@keyframes rotateAnimation45 {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes rotateAnimation90 {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
+}
+

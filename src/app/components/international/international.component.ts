@@ -23,5 +23,4 @@ export class InternationalComponent {
     changeShowLangList() {
         this.showLangList = !this.showLangList
     }
-
 }
