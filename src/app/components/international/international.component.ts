@@ -1,6 +1,5 @@
 import { ClickStopPropagationDirective } from '@/directives/click-stop-propagation.directive'
-import { I18nService } from '@/services'
-import { TRANSLATION_LANG_KEY, translationLangList } from '@/types'
+import { I18nService, LANG_OPTIONS, langList } from '@/services'
 import { Component } from '@angular/core'
 
 @Component({
@@ -11,12 +10,12 @@ import { Component } from '@angular/core'
     styleUrl: './international.component.scss'
 })
 export class InternationalComponent {
-    langList = translationLangList
+    langListDisplay = langList
     showLangList = false
     constructor(private i18n: I18nService) { }
 
-    changeLang(lang: TRANSLATION_LANG_KEY) {
-        this.i18n.setLang(lang)
+    changeLang(lang: LANG_OPTIONS) {
+        this.i18n.use(lang)
         this.changeShowLangList()
     }
 

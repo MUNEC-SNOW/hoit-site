@@ -1,33 +1,66 @@
-import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable } from 'rxjs'
-import {
-    TRANSLATION_LANG_KEY,
-    TRANSLATION_TEXT_KEY,
-    translation
-} from '@/types'
+import { EventEmitter, Injectable } from '@angular/core'
+import { Observable, map, of, take } from 'rxjs'
+import { HttpClient } from '@angular/common/http'
+
+export const langList = [
+    {
+        name: '简',
+        code: 'cn'
+    },
+    {
+        name: '繁',
+        code: 'hk'
+    },
+    {
+        name: 'EN',
+        code: 'en'
+    }
+] as const
+
+export declare type LANG_OPTIONS = typeof langList[number]['code']
+
+export interface Translations {
+    [key: string]: string;
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class I18nService {
-    lang = new BehaviorSubject<TRANSLATION_LANG_KEY>('en-US')
-    private currentLang: TRANSLATION_LANG_KEY = 'en-US'
-    constructor() { }
+    private currentLang = 'en'
+    private translations: Translations | null = null
+    public onTranslationChange = new EventEmitter<Translations>()
 
-    setLang(lang: TRANSLATION_LANG_KEY): void {
-        if(this.currentLang === lang) {
-            return
+    constructor(private http: HttpClient) {
+        this.loadTranslations(this.currentLang)
+    }
+
+    /** Changes the language */
+    public use(language: LANG_OPTIONS): void {
+        this.currentLang = language
+        this.loadTranslations(language)
+    }
+
+    /** Translates a key asynchronously */
+    public get(key: string): Observable<string> {
+        if (this.translations) {
+            return of(this.translations[key])
         }
-        this.currentLang = lang
-        this.lang.next(lang)
+        return this.onTranslationChange.pipe(
+            take(1),
+            map((translations) => translations[key])
+        )
     }
 
-    getLang(): Observable<TRANSLATION_LANG_KEY> {
-        return this.lang.asObservable()
-    }
-
-    getTranslate(lang_key: TRANSLATION_LANG_KEY, lang: TRANSLATION_TEXT_KEY) {
-        return translation[lang_key][lang]
+    /** Loads the translations for the given language */
+    private loadTranslations(language: string): void {
+        this.translations = null
+        this.http
+            .get<Translations>(`assets/i18n/${language}.json`)
+            .subscribe((translations) => {
+                this.translations = translations
+                this.onTranslationChange.emit(translations)
+            })
     }
 }
 

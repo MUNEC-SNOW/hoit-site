@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
-import { ShareModule } from './share.module'
 import { InternationalComponent } from './components/international/international.component'
 
 @Component({
@@ -10,7 +9,6 @@ import { InternationalComponent } from './components/international/international
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     imports: [
-        ShareModule,
         RouterOutlet,
         InternationalComponent
     ]

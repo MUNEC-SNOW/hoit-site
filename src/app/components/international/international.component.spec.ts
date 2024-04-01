@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { InternationalComponent } from './international.component'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 
 describe('InternationalComponent', () => {
     let component: InternationalComponent
@@ -8,9 +9,8 @@ describe('InternationalComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [InternationalComponent]
-        })
-            .compileComponents()
+            imports: [InternationalComponent, HttpClientTestingModule]
+        }).compileComponents()
 
         fixture = TestBed.createComponent(InternationalComponent)
         component = fixture.componentInstance

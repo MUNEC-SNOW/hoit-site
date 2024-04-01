@@ -1,7 +1,7 @@
 <div class="change-lang-wrapper">
     <button class="change-lang-icon cursor-pointer" (click)="changeShowLangList()" >
     @if (showLangList) {
-        @for (lang of langList; track lang.code; let index = $index) {
+        @for (lang of langListDisplay; track lang.code; let index = $index) {
             <button class="change-lang-btn" appClickStopPropagation (click)="changeLang(lang.code)" (tabindex)="index">{{ lang.name }}</button>
         }
     }

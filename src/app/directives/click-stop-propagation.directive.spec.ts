@@ -8,7 +8,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
         <button
             id="fake-btn-1"
             [appClickStopPropagation]
-            (click)="fakeClick()"
         >123</button>
     </button>
     `,
@@ -17,10 +16,6 @@ class HostComponent {
     a = 0
     fatherClick() {
         this.a = 1
-    }
-
-    fakeClick() {
-
     }
 
     getA() {

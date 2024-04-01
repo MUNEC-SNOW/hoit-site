@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { HeaderComponent } from '@/components/header/header.component'
-import { TranslatePipe } from '@/pipes/translate.pipe'
+import { TranslatePipe } from '@/pipes/translate/translate.pipe'
 
 @Component({
     selector: 'app-crush',
