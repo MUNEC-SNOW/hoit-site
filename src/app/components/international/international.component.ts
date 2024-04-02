@@ -8,7 +8,7 @@ import { LANG_OPTIONS, langList } from '@/types'
     standalone: true,
     imports: [ClickStopPropagationDirective],
     templateUrl: './international.component.html',
-    styleUrl: './international.component.scss'
+    styleUrl: './international.component.scss',
 })
 export class InternationalComponent {
     langListDisplay = langList
