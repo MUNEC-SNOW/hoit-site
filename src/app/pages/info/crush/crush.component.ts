@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import { HeaderComponent } from '@/components/header/header.component'
 import { TranslatePipe } from '@/pipes/translate/translate.pipe'
 
 @Component({
@@ -7,7 +6,7 @@ import { TranslatePipe } from '@/pipes/translate/translate.pipe'
     standalone: true,
     templateUrl: './crush.component.html',
     styleUrl: './crush.component.scss',
-    imports: [HeaderComponent, TranslatePipe]
+    imports: [TranslatePipe]
 })
 export class CrushComponent {
 
