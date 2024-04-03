@@ -40,6 +40,11 @@
                 transform-origin: 0.3rem 3.3em;
                 animation: rotateAnimation90 0.5s linear forwards;
             }
+            &:nth-of-type(4) {
+                transform: rotate(135deg);
+                transform-origin: 0.3rem 3.3em;
+                animation: rotateAnimation135 0.5s linear forwards;
+            }
         }
     }
 }
@@ -59,6 +64,15 @@
     }
     100% {
         transform: rotate(90deg);
+    }
+}
+
+@keyframes rotateAnimation135 {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(135deg);
     }
 }
 

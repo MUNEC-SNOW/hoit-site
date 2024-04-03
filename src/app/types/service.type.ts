@@ -4,6 +4,10 @@ export const langList = [
         code: 'en'
     },
     {
+        name: 'FI',
+        code: 'fi'
+    },
+    {
         name: '简',
         code: 'cn'
     },

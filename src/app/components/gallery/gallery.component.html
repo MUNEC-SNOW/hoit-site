@@ -1,0 +1,9 @@
+<ul class="slider">
+    @for (image of images; track image.title; let index = $index) {
+        <li>
+            <input type="radio" id="slide{{ index + 1 }}" name="slide" checked>
+            <label for="slide{{ index + 1 }}"></label>
+            <img [src]="image.src" [alt]="image.title">
+        </li>
+    }
+</ul>
