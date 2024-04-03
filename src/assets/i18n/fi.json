@@ -1,3 +1,6 @@
 {
-    "hello": "Terve"
+    "hello": "Terve",
+    "gotLost": "Uh oh! Näyttää siltä, että eksyit. ",
+    "backToHome": "Palaa takaisin etusivulle, jos uskallat!",
+    "IDare": "Minä uskallan!"
 }

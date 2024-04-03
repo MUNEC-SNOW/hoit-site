@@ -2,11 +2,12 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy } from '@a
 import { Subscription } from 'rxjs'
 import Parallax from 'parallax-js'
 import { Router } from '@angular/router'
+import { TranslatePipe } from '@/pipes/translate/translate.pipe'
 
 @Component({
     selector: 'app-not-found',
     standalone: true,
-    imports: [],
+    imports: [TranslatePipe],
     templateUrl: './not-found.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrl: './not-found.component.scss'
@@ -17,7 +18,7 @@ export class NotFoundComponent implements AfterViewInit, OnDestroy {
 
     constructor(private router: Router) {}
 
-    toProfile(): void {
+    toCrush(): void {
         this.router.navigate(['/crush'])
     }
 

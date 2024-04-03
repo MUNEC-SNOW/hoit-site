@@ -28,8 +28,8 @@
         </div>
         <div class="text">
             <article>
-                <p>Uh oh! Looks like you got lost. <br>Go back to the homepage if you dare!</p>
-                <button (click)="toProfile()">I dare!</button>
+                <p>{{ 'gotLost' | translate }} <br> {{ 'backToHome' | translate }}</p>
+                <button (click)="toCrush()">{{ 'IDare' | translate }}</button>
             </article>
         </div>
     </div>

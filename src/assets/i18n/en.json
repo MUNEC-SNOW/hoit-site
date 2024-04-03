@@ -1,3 +1,6 @@
 {
-    "hello": "hello"
+    "hello": "hello",
+    "gotLost": "Uh oh! Looks like you got lost.",
+    "backToHome": "Go back to the home page if you dare!",
+    "IDare": "I dare!"
 }
