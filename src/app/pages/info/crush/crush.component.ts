@@ -12,9 +12,9 @@ import { GalleryComponent } from '@/components/gallery/gallery.component'
 })
 export class CrushComponent {
     images: Array<GALLERY_ITEM> = [
-        { src: 'https://dribbble.s3.amazonaws.com/users/322/screenshots/872485/coldchase.jpg', title: 'ColdChase'},
-        { src: 'https://dribbble.s3.amazonaws.com/users/322/screenshots/980517/icehut_sm.jpg', title: 'Panel 2'},
-        { src: 'https://dribbble.s3.amazonaws.com/users/322/screenshots/943660/hq_sm.jpg', title: 'Panel 3'},
-        { src: 'https://dribbble.s3.amazonaws.com/users/322/screenshots/599584/home.jpg', title: 'Panel 4'},
+        { src: './assets/imgs/pikaqu.svg', title: 'ColdChase', routerLink: 'pikaqu'},
+        { src: 'https://dribbble.s3.amazonaws.com/users/322/screenshots/980517/icehut_sm.jpg', title: 'Panel 2', routerLink: 'pikaqu'},
+        { src: 'https://dribbble.s3.amazonaws.com/users/322/screenshots/943660/hq_sm.jpg', title: 'Panel 3', routerLink: 'pikaqu'},
+        { src: 'https://dribbble.s3.amazonaws.com/users/322/screenshots/599584/home.jpg', title: 'Panel 4', routerLink: 'pikaqu'},
     ]
 }

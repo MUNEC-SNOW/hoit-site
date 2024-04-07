@@ -1,10 +1,13 @@
 import { Component, ElementRef, Input, AfterViewInit, ViewChild } from '@angular/core'
 import { GALLERY_ITEM } from '@/types'
+import { RouterLink } from '@angular/router'
 
 @Component({
     selector: 'app-gallery',
     standalone: true,
-    imports: [],
+    imports: [
+        RouterLink
+    ],
     templateUrl: './gallery.component.html',
     styleUrl: './gallery.component.scss'
 })

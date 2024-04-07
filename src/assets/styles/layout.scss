@@ -40,6 +40,12 @@ $spacer: 6px;
 	width: 100%;
 }
 
+.css-gallery-wrapper{
+    width: 100%;
+    height: calc(100% - 288px);
+    padding-top: 48px;
+}
+
 .flex-row {
 	display: flex;
 	flex-direction: row;

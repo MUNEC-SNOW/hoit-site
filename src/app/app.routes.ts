@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router'
 import { NotFoundComponent } from './pages/info/not-found/not-found.component'
+import { CrushComponent } from './pages/info/crush/crush.component'
 
 export const routes: Routes = [
     {
@@ -13,6 +14,10 @@ export const routes: Routes = [
     },
     {
         path: 'crush',
+        component: CrushComponent,
+    },
+    {
+        path: 'css-gallery',
         loadChildren: () => import('./pages/info/info-routing')
     },
     {

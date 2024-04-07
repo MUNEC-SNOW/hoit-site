@@ -2,4 +2,5 @@ export declare type DATA_TYPE = number | string | boolean | null | undefined | o
 export declare type GALLERY_ITEM = {
     src: string
     title: string
+    routerLink: string
 }

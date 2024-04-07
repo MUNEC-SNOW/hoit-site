@@ -48,11 +48,13 @@
         z-index: 10;
     }
 
-    img {
+    a {
         position: absolute;
-        height: 18.75rem;
-        width: 25rem;
         z-index: 10;
+        img{
+            height: 18.75rem;
+            width: 25rem;
+        }
     }
 
     &:before {

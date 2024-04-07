@@ -1,0 +1,30 @@
+.gallery-nav{
+    height: 240px;
+    background: linear-gradient(#54001F, #46001A, #380015);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .button-style {
+        background-image: linear-gradient(#FFC0CB, #D8BFD8);
+        color: #54001F; /* 深色文字，与背景形成对比 */
+        font-family: Arial, sans-serif;
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        text-decoration: none;
+        margin-right: 1rem;
+
+        &:hover {
+            transform: scale(1.1);
+            background-image: linear-gradient(#FFC0CB, #D8BFD8);
+        }
+
+        &:focus {
+            outline: 2px solid #FFD700;
+            outline-offset: 2px;
+        }
+    }
+}

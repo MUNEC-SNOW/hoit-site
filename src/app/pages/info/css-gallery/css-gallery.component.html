@@ -1,0 +1,6 @@
+<div class="gallery-nav">
+    @for (routerButton of routerButtons; track routerButton.id) {
+        <a class="button-style" [routerLink]="[routerButton.link]" routerLinkActive="active">{{ routerButton.name | translate }}</a>
+    }
+</div>
+<router-outlet></router-outlet>
