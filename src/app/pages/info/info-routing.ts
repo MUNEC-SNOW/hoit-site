@@ -12,9 +12,9 @@ export default [
                 loadComponent: () => import('./css-gallery/pikaqu/pikaqu.component').then(m => m.PikaquComponent)
             },
             {
-                path: 'css-gallery-two',
+                path: 'dvd-bouncing',
                 title: 'CSS Gallery',
-                loadComponent: () => import('../info/css-gallery/css-gallery-two/css-gallery-two.component').then(m => m.CssGalleryTwoComponent)
+                loadComponent: () => import('./css-gallery/dvd-bouncing/dvd-bouncing.component').then(m => m.DvdBouncingComponent)
             }
         ],
     },
