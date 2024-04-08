@@ -7,6 +7,4 @@ import { Component } from '@angular/core'
     templateUrl: './pikaqu.component.html',
     styleUrl: './pikaqu.component.scss'
 })
-export class PikaquComponent {
-
-}
+export class PikaquComponent {}
