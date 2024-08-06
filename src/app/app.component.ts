@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
-import { InternationalComponent } from './components/international/international.component'
+import { InternationalComponent } from '@/components/international/international.component'
+import { AnimateBannerComponent } from "@/components/animate-banner/animate-banner.component";
 
 @Component({
     selector: 'app-root',
@@ -10,7 +11,8 @@ import { InternationalComponent } from './components/international/international
     styleUrl: './app.component.scss',
     imports: [
         RouterOutlet,
-        InternationalComponent
+        InternationalComponent,
+        AnimateBannerComponent
     ]
 })
 export class AppComponent {
