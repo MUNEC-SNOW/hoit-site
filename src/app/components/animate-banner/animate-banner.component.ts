@@ -1,14 +1,17 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Subscription, fromEvent, map, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-animate-banner',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './animate-banner.component.html',
   styleUrl: './animate-banner.component.scss'
 })
-export class AnimateBannerComponent implements AfterViewInit {
+export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
     @ViewChild('bannerWrapper') bannerWrapper!: ElementRef<HTMLDivElement>
+    mouseMoveSubscription!: Subscription
     bannerWidth = 0
     bannerLeft = 0
     initMouseLeft = 0
@@ -23,68 +26,146 @@ export class AnimateBannerComponent implements AfterViewInit {
         this.bannerLeft = bW.offsetLeft
         this.initMouseLeft = bW.offsetLeft
 
-        bW.addEventListener('mouseenter', (e) => {
-            e.stopPropagation()
-            this.initMouseLeft = e.pageX - this.bannerLeft;
-            this.startListener()
-        })
+        const mouseEnter$ = fromEvent<MouseEvent>(bW, 'mouseenter').pipe(
+            map(event => {
+                event.stopPropagation()
+                this.initMouseLeft = event.pageX - this.bannerLeft
+                return event
+            })
+        );
 
-        bW.addEventListener('mouseleave', (e) => {
-            e.stopPropagation()
+        const mouseLeave$ = fromEvent<MouseEvent>(bW, 'mouseleave').pipe(
+            map(event => {
+                event.stopPropagation()
+                this.clearListener(event)
+                return event
+            })
+        )
 
-        })
+        const mouseMove$ = fromEvent<MouseEvent>(bW, 'mousemove').pipe(
+            map(event => {
+                event.stopPropagation()
+                return event
+            })
+        );
+
+        this.mouseMoveSubscription = mouseEnter$.pipe(
+            switchMap(() => mouseMove$.pipe(takeUntil(mouseLeave$)))
+        ).subscribe(event => {
+            const mouseLeft = event.pageX - this.bannerLeft;
+            const children = Array.from(this.bannerWrapper.nativeElement.children);
+            children.forEach((child, index) => {
+                let transformX = 0, transformY = 0;
+                switch (index) {
+                    case 1:
+                    case 2:
+                        transformX = this.calculatedPosition(mouseLeft, 7);
+                        break;
+                    case 3:
+                    case 4:
+                        transformX = this.calculatedPosition(mouseLeft, 20);
+                        break;
+                    case 5:
+                        transformX = this.calculatedPosition(mouseLeft, 182);
+                        transformY = this.calculatedPosition(mouseLeft, 7);
+                        break;
+                    case 6:
+                        transformX = this.calculatedPosition(mouseLeft, 12);
+                        break;
+                    case 7:
+                        transformX = this.calculatedPosition(mouseLeft, 50);
+                        break;
+                    case 8:
+                        transformX = this.calculatedPosition(mouseLeft, 73);
+                        break;
+                    case 9:
+                        transformX = this.calculatedPosition(mouseLeft, 48);
+                        transformY = this.calculatedPosition(mouseLeft, 24);
+                        break;
+                    case 10:
+                        transformX = this.calculatedPosition(mouseLeft, 60);
+                        transformY = this.calculatedPosition(mouseLeft, 30);
+                        break;
+                    case 11:
+                        transformX = this.calculatedPosition(mouseLeft, 82);
+                        break;
+                    case 12:
+                        transformX = this.calculatedPosition(mouseLeft, 121);
+                        break;
+                    case 13:
+                        transformX = this.calculatedPosition(mouseLeft, 592);
+                        break;
+                    case 14:
+                        transformX = this.calculatedPosition(mouseLeft, 182);
+                        break;
+                    case 15:
+                        transformX = this.calculatedPosition(mouseLeft, 170);
+                        break;
+                    case 16:
+                        transformX = this.calculatedPosition(mouseLeft, 182);
+                        transformY = this.calculatedPosition(mouseLeft, 80);
+                        break;
+                    case 17:
+                        transformX = this.calculatedPosition(mouseLeft, 213);
+                        transformY = this.calculatedPosition(mouseLeft, 12);
+                        break;
+                    case 18:
+                        transformX = this.calculatedPosition(mouseLeft, 300);
+                        break;
+                    case 19:
+                        transformX = this.calculatedPosition(mouseLeft, 32);
+                        break;
+                    case 20:
+                        transformX = this.calculatedPosition(mouseLeft, 35);
+                        break;
+                    default:
+                        return;
+                }
+
+                const element = child.querySelector(index === 13 || index === 19 || index === 20 ? 'video' : 'img');
+                if (element) {
+                    element.style.setProperty('transform', `translate(${transformX}px, ${transformY}px)`);
+                }
+            });
+        });
     }
 
-    function(event: MouseEvent) {
-        event.stopPropagation()
-        const mouseLeft = event.pageX - this.bannerLeft;
+    ngOnDestroy(): void {
+        this.mouseMoveSubscription.unsubscribe()
+    }
+
+    clearListener(event: MouseEvent) {
+        let startValue = this.calculatedPosition(event.pageX - this.bannerLeft);
         const children = Array.from(this.bannerWrapper.nativeElement.children)
         children.forEach((child, index) => {
-            switch(index) {
-                case 1:
-                case 2:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 7)}px, 0px)`);break;
-                case 3:
-                case 4:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 20)}px, 0px)`);break;
-                case 5:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 182)}px, ${this.calculatedPosition(mouseLeft, 7)}px)`);break;
-                case 6:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 12)}px, 0px)`);break;
-                case 7:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 50)}px, 0px)`);break;
-                case 8:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 73)}px, 0px)`);break;
-                case 9:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 48)}px, ${this.calculatedPosition(mouseLeft, 24)}px)`);break;
-                case 10:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 60)}px, ${this.calculatedPosition(mouseLeft, 30)}px)`);break;
-                case 11:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 82)}px, 0px)`);break;
-                case 12:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 121)}px, 0px)`);break;
-                case 13:
-                    child.querySelector('video')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 592)}px, 0px)`);break;
-                case 14:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 182)}px, 0px)`);break;
-                case 15:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 170)}px, 0px)`);break;
-                case 16:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 182)}px, ${this.calculatedPosition(mouseLeft, 80)}px)`);break;
-                case 17:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 333)}px, ${this.calculatedPosition(mouseLeft, 12)}px)`);break;
-                case 18:
-                    child.querySelector('img')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 183)}px, 0px)`);break;
-                case 19:
-                    child.querySelector('video')!.style.setProperty('transform', `translate(${this.calculatedPosition(mouseLeft, 282)}px, 0px)`);break;
-                case 20:
-                    child.querySelector('video')!.style.setProperty('transform', `translate(${0 - this.calculatedPosition(mouseLeft, 777)}px, 0px)`);break;
-                    default: break;
+            let endValue = 0
+            let duration = 200
+            let interval = 50
+            let steps = duration / interval
+            let stepValue = (startValue - endValue) / steps
+            let currentValue = startValue;
+            if (index > 0 && index <= 20) {
+                let timer = setInterval(() => {
+                    currentValue -= stepValue;
+                    const childElement = child.querySelector('img') || child.querySelector('video')
+                    childElement!.style.setProperty('transform', `translate(0px, 0px)`)
+                    if (Math.abs(currentValue - endValue) < Math.abs(stepValue)) {
+                        clearInterval(timer)
+                        const targetOffset = index === 13
+                            ? 'translate(580.645px, 0px)'
+                            : index === 17
+                                ? 'translate(120.774px, 0px)'
+                                : index === 18
+                                    ? 'translate(-120.774px, 0px)'
+                                    : index === 19
+                                        ? 'translate(250.839px, 0px)'
+                                        : index === 20
+                                            ? 'translate(-812.903px, 0px)'
+                                            : 'translate(0px, 0px)'
+                        childElement!.style.setProperty('transform', targetOffset)
+                    }
+                }, interval);
             }
         })
-    }
-
-    startListener() {
-        this.bannerWrapper.nativeElement.addEventListener('mousemove', this.function.bind(this))
     }
 }
