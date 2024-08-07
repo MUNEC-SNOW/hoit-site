@@ -178,18 +178,11 @@ export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
                     currentY -= stepY;
                     const newX = initX - currentX;
                     const newY = initY - currentY;
-                    if (index === 10) {
-                        console.log(newX, newY);
-                    }
 
                     childElement.style.transform = `translate(${newX}px, ${newY}px) rotate(0deg) scale(1)`;
 
                     if (Math.abs(currentX - endX) < Math.abs(stepX) || Math.abs(currentY - endY) < Math.abs(stepY)) {
                         clearInterval(timer);
-                        if (index === 10) {
-                            console.log(this.initTransforms[index]);
-                        }
-
                         childElement.style.setProperty('transform', this.initTransforms[index])
                     }
                 }, interval);
