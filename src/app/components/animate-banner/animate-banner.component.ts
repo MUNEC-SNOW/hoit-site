@@ -1,19 +1,23 @@
 import { NgOptimizedImage } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { Subscription, fromEvent, map, switchMap, takeUntil } from 'rxjs';
+import { Subscription, fromEvent, map } from 'rxjs';
 
 @Component({
-  selector: 'app-animate-banner',
-  standalone: true,
-  imports: [NgOptimizedImage],
-  templateUrl: './animate-banner.component.html',
-  styleUrl: './animate-banner.component.scss'
+    selector: 'app-animate-banner',
+    standalone: true,
+    imports: [NgOptimizedImage],
+    templateUrl: './animate-banner.component.html',
+    styleUrl: './animate-banner.component.scss'
 })
 export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
     @ViewChild('bannerWrapper') bannerWrapper!: ElementRef<HTMLDivElement>
     mouseMoveSubscription!: Subscription
     mouseLeaveSubscription!: Subscription
+    mouseEnterSubscription!: Subscription
 
+    children: Element[] = []
+    initTransforms: string[] = []
+    transformMatches: RegExpMatchArray[] = []
     bannerWidth = 0
     bannerLeft = 0
     initMouseLeft = 0
@@ -27,6 +31,16 @@ export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
         this.bannerWidth = bW.offsetWidth
         this.bannerLeft = bW.offsetLeft
         this.initMouseLeft = bW.offsetLeft
+        this.children = Array.from(this.bannerWrapper.nativeElement.children)
+        this.initTransforms = this.children.map((child, index) => child.querySelector(index === 13 || index === 19 || index === 20 ? 'video' : 'img')!.style.transform)
+        this.transformMatches = this.initTransforms.map(transform => transform.match(/translate\(([^)]+)\)/)!)
+
+        const mouseEnter$ = fromEvent<MouseEvent>(bW, 'mouseenter').pipe(
+            map(event => {
+                event.stopPropagation()
+                return event
+            })
+        )
 
         const mouseLeave$ = fromEvent<MouseEvent>(bW, 'mouseleave').pipe(
             map(event => {
@@ -42,10 +56,13 @@ export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
             })
         );
 
+        this.mouseEnterSubscription = mouseEnter$.subscribe(event => {
+            this.initMouseLeft = event.pageX - this.bannerLeft
+        })
+
         this.mouseMoveSubscription = mouseMove$.subscribe(event => {
-            const mouseLeft = event.pageX - this.bannerLeft;
-            const children = Array.from(this.bannerWrapper.nativeElement.children);
-            children.forEach((child, index) => {
+            const mouseLeft = event.pageX - this.bannerLeft
+            this.children.forEach((child, index) => {
                 let transformX = 0, transformY = 0;
                 switch (index) {
                     case 1:
@@ -113,55 +130,70 @@ export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
                         return;
                 }
 
-                const element = child.querySelector(index === 13 || index === 19 || index === 20 ? 'video' : 'img');
+                const element = child.querySelector(index === 13 || index === 19 || index === 20 ? 'video' : 'img')!
+                let currentX = 0, currentY = 0;
+                const [x, y] = this.transformMatches[index]![1].split(',').map(val => parseFloat(val));
+                currentX = x || 0;
+                currentY = y || 0;
+
+                const newX = currentX - transformX;
+                const newY = currentY - transformY;
                 if (element) {
-                    element.style.setProperty('transform', `translate(${transformX}px, ${transformY}px)`);
+                    element.style.setProperty('transform', `translate(${newX}px, ${newY}px) rotate(0deg) scale(1)`);
                 }
             });
         });
 
         this.mouseLeaveSubscription = mouseLeave$.subscribe((e) => {
-            this.clearListener(e)
+            this.clearListener.bind(this)();
         })
     }
 
     ngOnDestroy(): void {
         this.mouseMoveSubscription.unsubscribe()
         this.mouseLeaveSubscription.unsubscribe()
+        this.mouseEnterSubscription.unsubscribe()
     }
 
-    clearListener(event: MouseEvent) {
-        let startValue = this.calculatedPosition(event.pageX - this.bannerLeft);
-        const children = Array.from(this.bannerWrapper.nativeElement.children)
-        children.forEach((child, index) => {
-            let endValue = 0
-            let duration = 200
-            let interval = 50
-            let steps = duration / interval
-            let stepValue = (startValue - endValue) / steps
-            let currentValue = startValue;
+    clearListener() {
+        const duration = 500;
+        const interval = 50;
+        const steps = duration / interval;
+        const currentTransforms = this.children.map((child, index) => child.querySelector(index === 13 || index === 19 || index === 20 ? 'video' : 'img')!.style.transform)
+
+        this.children.forEach((child, index) => {
+            const [ initX, initY ] = this.transformMatches[index]![1].split(',').map(parseFloat)
+            const endX = initX || 0
+            const endY = initY || 0
+            let [ currentX, currentY ] = currentTransforms[index].match(/translate\(([^)]+)\)/)![1].split(',').map(parseFloat)
+            const stepX = (currentX - endX) / steps
+            const stepY = (currentY - endY) / steps
+
             if (index > 0 && index <= 20) {
-                let timer = setInterval(() => {
-                    currentValue -= stepValue;
-                    const childElement = child.querySelector('img') || child.querySelector('video')
-                    childElement!.style.setProperty('transform', `translate(0px, 0px)`)
-                    if (Math.abs(currentValue - endValue) < Math.abs(stepValue)) {
-                        clearInterval(timer)
-                        const targetOffset = index === 13
-                            ? 'translate(580.645px, 0px)'
-                            : index === 17
-                                ? 'translate(120.774px, 0px)'
-                                : index === 18
-                                    ? 'translate(-120.774px, 0px)'
-                                    : index === 19
-                                        ? 'translate(250.839px, 0px)'
-                                        : index === 20
-                                            ? 'translate(-812.903px, 0px)'
-                                            : 'translate(0px, 0px)'
-                        childElement!.style.setProperty('transform', targetOffset)
+                const childElement = child.querySelector('img') || child.querySelector('video');
+                if (!childElement) return;
+
+                const timer = setInterval(() => {
+                    currentX -= stepX;
+                    currentY -= stepY;
+                    const newX = initX - currentX;
+                    const newY = initY - currentY;
+                    if (index === 10) {
+                        console.log(newX, newY);
+                    }
+
+                    childElement.style.transform = `translate(${newX}px, ${newY}px) rotate(0deg) scale(1)`;
+
+                    if (Math.abs(currentX - endX) < Math.abs(stepX) || Math.abs(currentY - endY) < Math.abs(stepY)) {
+                        clearInterval(timer);
+                        if (index === 10) {
+                            console.log(this.initTransforms[index]);
+                        }
+
+                        childElement.style.setProperty('transform', this.initTransforms[index])
                     }
                 }, interval);
             }
-        })
+        });
     }
 }
