@@ -12,6 +12,8 @@ import { Subscription, fromEvent, map, switchMap, takeUntil } from 'rxjs';
 export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
     @ViewChild('bannerWrapper') bannerWrapper!: ElementRef<HTMLDivElement>
     mouseMoveSubscription!: Subscription
+    mouseLeaveSubscription!: Subscription
+
     bannerWidth = 0
     bannerLeft = 0
     initMouseLeft = 0
@@ -26,18 +28,9 @@ export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
         this.bannerLeft = bW.offsetLeft
         this.initMouseLeft = bW.offsetLeft
 
-        const mouseEnter$ = fromEvent<MouseEvent>(bW, 'mouseenter').pipe(
-            map(event => {
-                event.stopPropagation()
-                this.initMouseLeft = event.pageX - this.bannerLeft
-                return event
-            })
-        );
-
         const mouseLeave$ = fromEvent<MouseEvent>(bW, 'mouseleave').pipe(
             map(event => {
                 event.stopPropagation()
-                this.clearListener(event)
                 return event
             })
         )
@@ -49,9 +42,7 @@ export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
             })
         );
 
-        this.mouseMoveSubscription = mouseEnter$.pipe(
-            switchMap(() => mouseMove$.pipe(takeUntil(mouseLeave$)))
-        ).subscribe(event => {
+        this.mouseMoveSubscription = mouseMove$.subscribe(event => {
             const mouseLeft = event.pageX - this.bannerLeft;
             const children = Array.from(this.bannerWrapper.nativeElement.children);
             children.forEach((child, index) => {
@@ -128,10 +119,15 @@ export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
                 }
             });
         });
+
+        this.mouseLeaveSubscription = mouseLeave$.subscribe((e) => {
+            this.clearListener(e)
+        })
     }
 
     ngOnDestroy(): void {
         this.mouseMoveSubscription.unsubscribe()
+        this.mouseLeaveSubscription.unsubscribe()
     }
 
     clearListener(event: MouseEvent) {
