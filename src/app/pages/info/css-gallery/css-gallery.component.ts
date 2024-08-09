@@ -16,6 +16,7 @@ import { RouterLink, RouterOutlet } from '@angular/router'
 export class CssGalleryComponent {
     routerButtons: { name: string, link: string, id: string }[] = [
         { name: 'pikaqu', link: 'pikaqu', id: 'link'},
-        { name: 'dvdBouncing', link: 'dvd-bouncing', id: 'dvd-bouncing'}
+        { name: 'dvdBouncing', link: 'dvd-bouncing', id: 'dvd-bouncing'},
+        { name: 'sphere', link: 'sphere', id: 'sphere'},
     ]
 }

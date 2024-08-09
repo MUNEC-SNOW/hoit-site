@@ -156,8 +156,8 @@ export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
     }
 
     clearListener() {
-        const duration = 500;
-        const interval = 50;
+        const duration = 300;
+        const interval = 10;
         const steps = duration / interval;
         const currentTransforms = this.children.map((child, index) => child.querySelector(index === 13 || index === 19 || index === 20 ? 'video' : 'img')!.style.transform)
 
@@ -176,11 +176,7 @@ export class AnimateBannerComponent implements AfterViewInit, OnDestroy {
                 const timer = setInterval(() => {
                     currentX -= stepX;
                     currentY -= stepY;
-                    const newX = initX - currentX;
-                    const newY = initY - currentY;
-
-                    childElement.style.transform = `translate(${newX}px, ${newY}px) rotate(0deg) scale(1)`;
-
+                    childElement.style.transform = `translate(${currentX}px, ${currentY}px) rotate(0deg) scale(1)`;
                     if (Math.abs(currentX - endX) < Math.abs(stepX) || Math.abs(currentY - endY) < Math.abs(stepY)) {
                         clearInterval(timer);
                         childElement.style.setProperty('transform', this.initTransforms[index])

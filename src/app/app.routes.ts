@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router'
-import { NotFoundComponent } from './pages/info/not-found/not-found.component'
-import { CrushComponent } from './pages/info/crush/crush.component'
+import { NotFoundComponent } from './pages/not-found/not-found.component'
 
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: '/crush',
+        redirectTo: '/info/crush',
         pathMatch: 'full'
     },
     {
@@ -13,12 +12,8 @@ export const routes: Routes = [
         component: NotFoundComponent
     },
     {
-        path: 'crush',
-        component: CrushComponent,
-    },
-    {
-        path: 'css-gallery',
-        loadChildren: () => import('./pages/info/info-routing')
+        path: 'info',
+        loadChildren: () => import('./pages/info/info.routing')
     },
     {
         path: '**',
