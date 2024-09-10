@@ -3,7 +3,7 @@ import { Component } from '@angular/core'
 import { RouterLink, RouterOutlet } from '@angular/router'
 
 @Component({
-    selector: 'app-css-gallery',
+    selector: 'kkw-css-gallery',
     standalone: true,
     imports: [
         RouterOutlet,

@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@ang
 import { Subscription, fromEvent, map } from 'rxjs';
 
 @Component({
-    selector: 'app-animate-banner',
+    selector: 'kkw-animate-banner',
     standalone: true,
     imports: [NgOptimizedImage],
     templateUrl: './animate-banner.component.html',

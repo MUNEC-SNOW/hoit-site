@@ -4,7 +4,7 @@ import { GALLERY_ITEM } from '@/types'
 import { GalleryComponent } from '@/components/gallery/gallery.component'
 
 @Component({
-    selector: 'app-crush',
+    selector: 'kkw-crush',
     standalone: true,
     templateUrl: './crush.component.html',
     styleUrl: './crush.component.scss',

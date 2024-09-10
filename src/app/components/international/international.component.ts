@@ -4,7 +4,7 @@ import { I18nService } from '@/services'
 import { LANG_OPTIONS, langList } from '@/types'
 
 @Component({
-    selector: 'app-international',
+    selector: 'kkw-international',
     standalone: true,
     imports: [ClickStopPropagationDirective],
     templateUrl: './international.component.html',

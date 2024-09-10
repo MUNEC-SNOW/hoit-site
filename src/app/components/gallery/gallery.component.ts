@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router'
 import { NgOptimizedImage } from '@angular/common'
 
 @Component({
-    selector: 'app-gallery',
+    selector: 'kkw-gallery',
     standalone: true,
     imports: [
         RouterLink,

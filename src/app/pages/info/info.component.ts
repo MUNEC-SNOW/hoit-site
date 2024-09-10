@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router'
 import { AnimateBannerComponent } from "@/components/animate-banner/animate-banner.component";
 
 @Component({
-    selector: 'app-root',
+    selector: 'kkw-info',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './info.component.html',

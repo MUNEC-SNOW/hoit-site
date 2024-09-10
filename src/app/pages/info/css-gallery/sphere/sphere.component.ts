@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-polaroid',
+  selector: 'kkw-polaroid',
   standalone: true,
   imports: [],
   templateUrl: './sphere.component.html',
