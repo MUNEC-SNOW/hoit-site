@@ -12,11 +12,15 @@
         },
         "root": "",
         "sourceRoot": "src",
-        "prefix": "app",
+        "prefix": "kkw",
         "architect": {
             "build": {
                 "builder": "@angular-devkit/build-angular:application",
                 "options": {
+                    "allowedCommonJsDependencies": [
+                        "parallax-js"
+                    ],
+                    "optimization": true,
                     "outputPath": "dist/hoit-site",
                     "index": "src/index.html",
                     "browser": "src/main.ts",
@@ -26,8 +30,16 @@
                     "tsConfig": "tsconfig.app.json",
                     "inlineStyleLanguage": "scss",
                     "assets": [
-                        "src/favicon.ico",
-                        "src/assets"
+                        {
+                            "glob": "favicon.ico",
+                            "input": "src/",
+                            "output": "/"
+                        },
+                        {
+                            "glob": "**/*",
+                            "input": "src/assets/",
+                            "output": "/assets/"
+                        }
                     ],
                     "styles": [
                         "src/styles.scss"
@@ -44,8 +56,8 @@
                             },
                             {
                                 "type": "anyComponentStyle",
-                                "maximumWarning": "2kb",
-                                "maximumError": "4kb"
+                                "maximumWarning": "10kb",
+                                "maximumError": "20kb"
                             }
                         ],
                         "outputHashing": "all"

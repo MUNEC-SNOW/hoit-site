@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 
 @Component({
-    selector: 'app-pikaqu',
+    selector: 'kkw-pikaqu',
     standalone: true,
     imports: [],
     templateUrl: './pikaqu.component.html',

@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing'
-import { AppComponent } from './app.component'
+import { KkwComponent } from './kkw.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 
-describe('AppComponent', () => {
-    let app: AppComponent
+describe('KkwComponent', () => {
+    let app: KkwComponent
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [AppComponent, HttpClientTestingModule],
+            imports: [KkwComponent, HttpClientTestingModule],
         }).compileComponents()
-        const fixture = TestBed.createComponent(AppComponent)
+        const fixture = TestBed.createComponent(KkwComponent)
         app = fixture.componentInstance
     })
 

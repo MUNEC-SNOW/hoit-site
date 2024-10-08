@@ -1,5 +1,5 @@
 <div class="change-lang-wrapper">
-    <button class="change-lang-icon cursor-pointer" (click)="changeShowLangList()" >
+    <button aria-label="Change language" class="change-lang-icon cursor-pointer" (click)="changeShowLangList()" >
     @if (showLangList) {
         @for (lang of langListDisplay; track lang.code; let index = $index) {
             <button

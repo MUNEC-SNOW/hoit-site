@@ -216,13 +216,13 @@ export function click<T>(fixture: ComponentFixture<T>, testId: string): void {
 }
 
 /**
- * Finds a nested Component by its selector, e.g. `app-example`.
+ * Finds a nested Component by its selector, e.g. `kkw-example`.
  * Throws an error if no element was found.
  * Use this only for shallow component testing.
  * When finding other elements, use `findEl` / `findEls` and `data-testid` attributes.
  *
  * @param fixture Fixture of the parent Component
- * @param selector Element selector, e.g. `app-example`
+ * @param selector Element selector, e.g. `kkw-example`
  */
 export function findComponent<T>(
     fixture: ComponentFixture<T>,
@@ -232,7 +232,7 @@ export function findComponent<T>(
 }
 
 /**
- * Finds all nested Components by its selector, e.g. `app-example`.
+ * Finds all nested Components by its selector, e.g. `kkw-example`.
  */
 export function findComponents<T>(
     fixture: ComponentFixture<T>,

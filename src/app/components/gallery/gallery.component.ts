@@ -1,12 +1,14 @@
 import { Component, ElementRef, Input, AfterViewInit, ViewChild } from '@angular/core'
 import { GALLERY_ITEM } from '@/types'
 import { RouterLink } from '@angular/router'
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
-    selector: 'app-gallery',
+    selector: 'kkw-gallery',
     standalone: true,
     imports: [
-        RouterLink
+        RouterLink,
+        NgOptimizedImage
     ],
     templateUrl: './gallery.component.html',
     styleUrl: './gallery.component.scss'

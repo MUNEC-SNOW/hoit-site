@@ -5,7 +5,7 @@ import { Router } from '@angular/router'
 import { TranslatePipe } from '@/pipes/translate/translate.pipe'
 
 @Component({
-    selector: 'app-not-found',
+    selector: 'kkw-not-found',
     standalone: true,
     imports: [TranslatePipe],
     templateUrl: './not-found.component.html',

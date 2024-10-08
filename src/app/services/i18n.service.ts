@@ -7,18 +7,18 @@ import { LANG_OPTIONS, Translations } from '@/types'
     providedIn: 'root'
 })
 export class I18nService {
-    private currentLang = 'en'
+    private currentLang: LANG_OPTIONS = 'en'
     private translations: Translations | null = null
     public onTranslationChange = new EventEmitter<Translations>()
 
     constructor(private http: HttpClient) {
-        this.loadTranslations(this.currentLang)
+        this.loadTranslations()
     }
 
     /** Changes the language */
     public use(language: LANG_OPTIONS): void {
         this.currentLang = language
-        this.loadTranslations(language)
+        this.loadTranslations()
     }
 
     /** Translates a key asynchronously */
@@ -33,10 +33,10 @@ export class I18nService {
     }
 
     /** Loads the translations for the given language */
-    private loadTranslations(language: string): void {
+    private loadTranslations(): void {
         this.translations = null
         this.http
-            .get<Translations>(`assets/i18n/${language}.json`)
+            .get<Translations>(`assets/i18n/${this.currentLang}.json`)
             .subscribe((translations) => {
                 this.translations = translations
                 this.onTranslationChange.emit(translations)

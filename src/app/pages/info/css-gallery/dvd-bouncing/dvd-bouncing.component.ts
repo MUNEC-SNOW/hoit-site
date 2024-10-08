@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 
 @Component({
-    selector: 'app-css-gallery-two',
+    selector: 'kkw-css-gallery-two',
     standalone: true,
     imports: [],
     templateUrl: './dvd-bouncing.component.html',
